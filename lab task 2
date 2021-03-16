@@ -1,37 +1,86 @@
-<?php
+<!DOCTYPE html>
+<html>
+<body>
 
-    session_start();
+<h2>Name</h2>
+<form>
+<input type="text" placeholder="Enter Username" name="uname" required>
+<br><br>
+<button type="submit">Submit</button>
+</form>
+</body>
+</html>
 
-    require "db.php";
+<!DOCTYPE html>
+<html>
+<body>
 
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        $tempEmail = $_POST["email"];
-        $tempPassword = $_POST["password"];
+<h2>Email</h2>
+<form>
+<input type="text" placeholder="Enter Username" name="uname" required>
+<br><br>
+<button type="submit">Submit</button>
+</form>
+</body>
+</html>
 
+<!DOCTYPE html>
+<html>
+<body>
 
-        $connection = mysqli_connect($serverName, $dbUsername, $dbPassword, $dbName);
+<h2>DATE OF BIRTH</h2>
+<form action="/action_page.php">
+<label for="birthday">Birthday:</label>
+<input type="date" id="birthday" name="birthday">
+<input type="submit">
+</form>
 
-        $queryString = "select id, name, email, password from admin where email = '$tempEmail' and password  = '$tempPassword'";
+<!DOCTYPE html>
+<html>
+<body>
 
-        $resultSet = mysqli_query($connection, $queryString);
-
-        if(mysqli_num_rows($resultSet) == 1)
-        {
-            $row = mysqli_fetch_assoc($resultSet);
-
-            $_SESSION["loggedInID"] = $row["id"];
-
-            header("Location: ../pageone.php");
-        }
-        else
-        {
-            echo "Invalid EMAIL/PASSWORD !!!";
-        }
-
-        mysqli_close($connection);
-    }
-
+<h2>GENDER</h2></h2>
+<form>
+<input type="radio" name="gender" id="gender" value="Male">Male<input type="radio" name="gender" value="Female">Female<input type="radio" name="gender" value="Other">Other<br><?php echo $gendererror;?>
+<br><br>
+<button type="submit">Submit</button>
+</form>
+</body>
+</html>
     
+<!DOCTYPE html>
+<html>
+<body>
 
-?>
+<h1>Degree</h1>
+<form action="/action_page.php">
+<input type="checkbox" id="SSC" name="SSC" value="SSC">
+<label for="SSC">SSC</label>
+<input type="checkbox" id="HSC" name="HSC" value="HSC">
+<label for="HSC"> HSC</label>
+<input type="checkbox" id="" name="BSc" value="BSc">
+<label for="BSc">BSc</label>
+<input type="checkbox" id="" name="MSc" value="MSc">
+<label for="MSc">MSc</label><br><br>
+ <input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>BLOOD GROUP</h2>
+
+<form action="/action_page.php">
+<select id="BLOOD" name="BLOOD">
+<option value="BLOOD">O+</option>
+<option value="BLOOD">B+</option>
+<option value="BLOOD">O-</option>
+<option value="BLOOD">AB-</option>
+</select><br><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
