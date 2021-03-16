@@ -1,37 +1,12 @@
-<?php
+<!DOCTYPE html>
+<html>
+<body>
 
-    session_start();
-
-    require "db.php";
-
-    if($_SERVER["REQUEST_METHOD"] == "POST")
-    {
-        $tempEmail = $_POST["email"];
-        $tempPassword = $_POST["password"];
-
-
-        $connection = mysqli_connect($serverName, $dbUsername, $dbPassword, $dbName);
-
-        $queryString = "select id, name, email, password from admin where email = '$tempEmail' and password  = '$tempPassword'";
-
-        $resultSet = mysqli_query($connection, $queryString);
-
-        if(mysqli_num_rows($resultSet) == 1)
-        {
-            $row = mysqli_fetch_assoc($resultSet);
-
-            $_SESSION["loggedInID"] = $row["id"];
-
-            header("Location: ../pageone.php");
-        }
-        else
-        {
-            echo "Invalid EMAIL/PASSWORD !!!";
-        }
-
-        mysqli_close($connection);
-    }
-
-    
-
-?>
+<h2>Name</h2>
+<form>
+<input type="text" placeholder="Enter Username" name="uname" required>
+<br><br>
+<button type="submit">Submit</button>
+</form>
+</body>
+</html>
