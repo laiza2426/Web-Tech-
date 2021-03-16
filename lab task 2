@@ -1,46 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>CSS User Profile Card</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-</head>
-<body style="background-color:lightgreen;">
+<?php
 
-<div class="wrapper">
-    <div class="left">
-        <img src="admin.jpg" 
-        alt="user" width="100">
-        <h4>Lamyea,Laiza</h4>
-         <p>Admin</p>
-    </div>
-    <div class="right">
-        <div class="info">
-            <h3>Admin Information</h3>
-            <div class="info_data">
-                 <div class="data">
-                    <h4>Email</h4>
-                    <p>payallia2@gmail.com</p>
-                 </div>
-                 <div class="data">
-                   <h4>Phone</h4>
-                    <p>016866603</p>
-              </div>
-            </div>
-        </div>
-      
-      <div class="projects">
-            <h3>Background</h3>
-            <div class="projects_data">
-                 <div class="data">
-                    <h4>Education</h4>
-                    <p>Bsc in CSE</p>
-                 </div>
-                 <div class="data">
-                   <h4>Institution</h4>
-                    <p>AIUB</p>
-              </div>
-            </div>
-        </div>
-      
+    session_start();
+
+    require "db.php";
+
+    if($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        $tempEmail = $_POST["email"];
+        $tempPassword = $_POST["password"];
+
+
+        $connection = mysqli_connect($serverName, $dbUsername, $dbPassword, $dbName);
+
+        $queryString = "select id, name, email, password from admin where email = '$tempEmail' and password  = '$tempPassword'";
+
+        $resultSet = mysqli_query($connection, $queryString);
+
+        if(mysqli_num_rows($resultSet) == 1)
+        {
+            $row = mysqli_fetch_assoc($resultSet);
+
+            $_SESSION["loggedInID"] = $row["id"];
+
+            header("Location: ../pageone.php");
+        }
+        else
+        {
+            echo "Invalid EMAIL/PASSWORD !!!";
+        }
+
+        mysqli_close($connection);
+    }
+
+    
+
+?>
